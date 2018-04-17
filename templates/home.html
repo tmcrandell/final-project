@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<!-- TODO: style with boostrap -->
+<h2>The current conditions: </h2>
+<ul>
+  <li> The indoor temperature is <b id="indoor_temp">??</b> </li>
+  <li> The indoor humidity is <b id="indoor_humidity">??</b> </li>
+  <li> The outdoor temperature is <b id="outdoor_temp">??</b> </li>
+  <li> The outdoor humidity is <b id="outdoor_humidity">??</b> </li>
+</ul>
+
+<!-- see https://canvas-gauges.com/documentation/examples/ -->
+<canvas
+  id="temp_gauge"
+  data-type="linear-gauge"
+  data-min-value="0"
+  data-max-value="100"
+  data-width="100"
+  data-animation-rule="elastic"
+  data-animation-duration="500"
+  ></canvas>
+
+<!-- TODO: style the output UI based on the values:
+for example:
+    if temperature is > 75 make the text *red*
+    if temperature is < 45 make the text *blue* -->
+
+<h2>Send a cheep</h2>
+<!-- TODO: add form with a name and message field:
+     on submit POST the data to /cheep -->
+
+{% endblock %}
