@@ -28,7 +28,7 @@ def data():
 
 
 @app.route("/cheep",methods=['POST'])
-def signup():
+def cheep():
     name = request.form['name']
     message = request.form['message']
     print("got a cheep from [%s]: %s" % (name,message))
