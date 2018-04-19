@@ -20,10 +20,13 @@ function getData(){
     
 $(function(){
     setInterval(getData,1000);
+    $("#indoor_temp_gauge").css("height","250px")
+    $("#outdoor_temp_gauge").css("height","250px")
+    $("#indoor_humidity").css("height","210px")
+    $("#indoor_humidity").css("width","270px")
+    $("#outdoor_humidity").css("width","270px")
+    $("#outdoor_humidity").css("height","210px")
 })
-
-
-
 
 
 
