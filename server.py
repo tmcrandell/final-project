@@ -4,6 +4,7 @@ from flask import (Flask,
                    request,
                    url_for,
                    render_template)
+import requests
 
 app = Flask(__name__)
 
@@ -17,8 +18,14 @@ def data():
     indoor_temp = random.randint(60,80)
     indoor_humidity = random.random()
     # TODO read temperature and humidity from openweathermap.org
-    outdoor_temp = random.randint(30,50)
-    outdoor_humidity = random.random()
+    payload={'q':'Annapolis','units':'imperial','APPID':'fd62ac498230ff40fa081d310e14b042'} #identifies annapolis as city, and my app id, use imperial units because America
+    r=requests.get('https://api.openweathermap.org/data/2.5/weather',params=payload) #sends the request, and saves weather response in r
+    r_dict=json.loads(r.text) #creates python dictionary from text response
+
+    #assigns outdoor humidity and temp from dictionary
+    outdoor_humidity=r_dict['main']['humidity']
+    outdoor_temp=r_dict['main']['temp']
+    
     # send the result as JSON
     return json.dumps({
         "indoor_temp": indoor_temp,
