@@ -1,34 +1,118 @@
 {% extends "layout.html" %}
+
 {% block body %}
 
-<!-- TODO: style with boostrap -->
-<h2>The current conditions: </h2>
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-6">
+      <h1 class="display-3">Weather Data</h1>
+    </div>
+    <div class="col-2">
+      <i class="far fa-sun fa-5x" style="color: orange"></i>
+    </div>
+    <div class="col-2">
+      <i class="fas fa-cloud fa-5x" style="color: gray"></i>
+    </div><div class="col-2">
+      <i class="far fa-sun fa-5x" style="color: orange"></i>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <p>Ever need to know the weather outside but you're an invtovert that hates the sunlight? Do you need to know the humidity because you're a filthy mouthbreather? Do you distrust Google more than Richard Stallman himself? Look no further than this homemade, organic, grass fed website than handily tells you the indoor/outdoor temperature as well as the indoor/outdoor humidity. Changing the world and advancing humanity one website at a time.</p>
+    </div>
+  </div>
+</div>
 
-<!-- example of FontAwesome icon -->
-<i class="far fa-sun fa-5x" style="color: orange"></i>
-<i class="fas fa-cloud fa-5x" style="color: gray"></i>
 
-<ul>
-  <li> The indoor temperature is <b id="indoor_temp">??</b> </li>
-  <li> The indoor humidity is <b id="indoor_humidity">??</b> </li>
-  <li> The outdoor temperature is <b id="outdoor_temp">??</b> </li>
-  <li> The outdoor humidity is <b id="outdoor_humidity">??</b> </li>
-</ul>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <h3>Outside Weather</h3>
+      <p>The outdoor temperature is <b id="outdoor_temp">??</b> degrees F</p>
+    </div>
+    <div class="col-md-3">
+      <h3>Indoor Weather</h3>
+      <p>The indoor temperature is <b id="indoor_temp">??</b> degrees C</p>
+    </div>
+    <div class="col-md-3">
+      <h3>Outdoor Humidity</h3>
+      <p>The outdoor humidity is <b id="outdoor_humidity">??</b>%</p>
+    </div>
+    <div class="col-md-3">
+      <h3>Indoor Humidity</h3>
+      <p>The indoor humidity is <b id="indoor_humidity">??</b>%</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <canvas
+	 id="outdoor_temp_gauge"
+	 data-type="linear-gauge"
+	 data-min-value="0"
+	 data-max-value="100"
+	 data-width="100"
+	 data-animation-rule="elastic"
+	 data-animation-duration="500"
+	 style="height: 150px"
+	 ></canvas>
+    </div>
+    <div class="col-3">
+      <canvas
+	 id="indoor_temp_gauge"
+	 data-type="linear-gauge"
+	 data-min-value="0"
+	 data-max-value="100"
+	 data-width="100"
+	 data-animation-rule="elastic"
+	 data-animation-duration="500"
+	 style="height: 150px"
+	 ></canvas>
+    </div>
+    <div class="col-3">
+      <canvas
+	 id="outdoor_humidity"
+	 data-type="radial-gauge"
+	 data-min-value="0"
+	 data-max-value="100"
+	 data-width="100"
+	 data-animation-rule="elastic"
+	 data-animation-duration="500"
+	 data-animate-on-init="true"
+	 ></canvas>
+    </div>
+    <div class="col-3">
+      <canvas
+	 id="indoor_humidity"
+	 data-type="radial-gauge"
+	 data-min-value="0"
+	 data-max-value="100"
+	 data-width="100"
+	 data-animation-rule="elastic"
+	 data-animation-duration="500"
+	 data-animate-on-init="true"
+	 data-animate-on-init="true"
+	 ></canvas>
+    </div>
+  </div>
+</div>
 
-<!-- see https://canvas-gauges.com/documentation/examples/ -->
-<canvas
-  id="temp_gauge"
-  data-type="linear-gauge"
-  data-min-value="0"
-  data-max-value="100"
-  data-width="100"
-  data-animation-rule="elastic"
-  data-animation-duration="500"
-  ></canvas>
-
+</br>
 
 <h2>Send a cheep</h2>
-<!-- TODO: add form with a name and message field:
-     on submit POST the data to /cheep -->
+<form action="/cheep" method="post">
+  <div class="form-group">
+    <div class="row">
+      <div class="col-6">
+	<label>Name: </label>
+	<input name="name">
+      </div>
+      <div class="col-6">
+	<label>Cheep: </label>
+	<input name="message" placeholder="Cheep away">
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
 {% endblock %}

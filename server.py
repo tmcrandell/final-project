@@ -5,8 +5,12 @@ from flask import (Flask,
                    url_for,
                    render_template)
 import requests
+import serial
 
 app = Flask(__name__)
+cheepfile="cheeps.txt"
+file=open(cheepfile,"w")
+    
 
 @app.route("/")
 def home():
@@ -14,10 +18,19 @@ def home():
 
 @app.route("/data.json")
 def data():
+
+    data=[1,1]
+    """
+    s=serial.Serial("/dev/ttyACM0",timeout=1)
+    s.write('a')
+    vals=s.readline()
+    data=[int(x) for x in vals.split(',')]
+    """
+    
     # TODO read temperature and humidity from Arduino
-    indoor_temp = random.randint(60,80)
-    indoor_humidity = random.random()
-    # TODO read temperature and humidity from openweathermap.org
+    indoor_temp = data[0]
+    indoor_humidity = data[1]
+    
     payload={'q':'Annapolis','units':'imperial','APPID':'fd62ac498230ff40fa081d310e14b042'} #identifies annapolis as city, and my app id, use imperial units because America
     r=requests.get('https://api.openweathermap.org/data/2.5/weather',params=payload) #sends the request, and saves weather response in r
     r_dict=json.loads(r.text) #creates python dictionary from text response
@@ -40,5 +53,6 @@ def cheep():
     message = request.form['message']
     print("got a cheep from [%s]: %s" % (name,message))
     # TODO: append [name: message] to a file of cheeps
+    write("["+'name'+':'+'message'+']')
     # TODO: display the cheep on the kit LCD
     return render_template('thankyou.html')
