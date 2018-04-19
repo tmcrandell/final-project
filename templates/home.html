@@ -99,20 +99,20 @@
 </br>
 
 <h2>Send a cheep</h2>
+
 <form action="/cheep" method="post">
-  <div class="form-group">
-    <div class="row">
-      <div class="col-6">
-	<label>Name: </label>
-	<input name="name">
-      </div>
-      <div class="col-6">
-	<label>Cheep: </label>
-	<input name="message" placeholder="Cheep away">
-      </div>
+  <div class="form-row">
+    <div class="col-4">
+      <label>Name: </label>
+      <input name="name" type="text" placeholder="Name" required>
+    </div>
+    <div class="col-4">
+      <label>Cheep: </label>
+      <input name="message" type="text" placeholder="Cheep away" maxlength="15" required>
+      <small class="form-text">Less than 16 characters please</small>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">Cheep</button>
 </form>
-
+      	
 {% endblock %}

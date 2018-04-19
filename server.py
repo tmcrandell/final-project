@@ -8,9 +8,6 @@ import requests
 import serial
 
 app = Flask(__name__)
-cheepfile="cheeps.txt"
-file=open(cheepfile,"w")
-    
 
 @app.route("/")
 def home():
@@ -26,8 +23,7 @@ def data():
     vals=s.readline()
     data=[int(x) for x in vals.split(',')]
     """
-    
-    # TODO read temperature and humidity from Arduino
+
     indoor_temp = data[0]
     indoor_humidity = data[1]
     
@@ -49,10 +45,12 @@ def data():
 
 @app.route("/cheep",methods=['POST'])
 def cheep():
+    f1=open("./cheeps.txt",'a')
     name = request.form['name']
     message = request.form['message']
     print("got a cheep from [%s]: %s" % (name,message))
-    # TODO: append [name: message] to a file of cheeps
-    write("["+'name'+':'+'message'+']')
+ 
+    f1.write('['+name+': '+message+']'+'\n')
+    f1.close()
     # TODO: display the cheep on the kit LCD
     return render_template('thankyou.html')
