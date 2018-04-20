@@ -13,19 +13,13 @@ function getData(){
 	// update gauges
 	$("#indoor_temp_gauge").attr("data-value",weather.indoor_temp)
 	$("#outdoor_temp_gauge").attr("data-value",weather.outdoor_temp)
-	$("#indoor_humidity").attr("data-value",weather.indoor_humidity)
-	$("#outdoor_humidity").attr("data-value",weather.outdoor_humidity)
+	$("#indoor_h_gauge").attr("data-value",weather.indoor_humidity)
+	$("#outdoor_h_gauge").attr("data-value",weather.outdoor_humidity)
     });
 }
     
 $(function(){
     setInterval(getData,1000);
-    $("#indoor_temp_gauge").css("height","250px")
-    $("#outdoor_temp_gauge").css("height","250px")
-    $("#indoor_humidity").css("height","210px")
-    $("#indoor_humidity").css("width","270px")
-    $("#outdoor_humidity").css("width","270px")
-    $("#outdoor_humidity").css("height","210px")
 })
 
 

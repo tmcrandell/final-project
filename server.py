@@ -16,7 +16,7 @@ def home():
 @app.route("/data.json")
 def data():
 
-    data=[1,1]
+    data=[51,49]
     """
     s=serial.Serial("/dev/ttyACM0",timeout=1)
     s.write('a')
