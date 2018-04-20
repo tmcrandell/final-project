@@ -49,8 +49,12 @@ def cheep():
     name = request.form['name']
     message = request.form['message']
     print("got a cheep from [%s]: %s" % (name,message))
- 
     f1.write('['+name+': '+message+']'+'\n')
     f1.close()
+    
     # TODO: display the cheep on the kit LCD
     return render_template('thankyou.html')
+
+@app.route("/test")
+def testfunc():
+    return "so good"
