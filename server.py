@@ -15,15 +15,15 @@ def home():
 
 @app.route("/data.json")
 def data():
-
-    data=[51,49]
-    """
-    s=serial.Serial("/dev/ttyACM0",timeout=1)
-    s.write('a')
-    vals=s.readline()
-    data=[int(x) for x in vals.split(',')]
-    """
-
+    try:
+        s=serial.Serial("/dev/ttyACM0",timeout=1)
+        s.write('a')
+        vals=s.readline()
+        data=[int(x) for x in vals.split(',')]
+        s.close()
+    except:
+        data=[51,49]
+    
     indoor_temp = data[0]
     indoor_humidity = data[1]
     
@@ -45,14 +45,25 @@ def data():
 
 @app.route("/cheep",methods=['POST'])
 def cheep():
-    f1=open("./cheeps.txt",'a')
-    name = request.form['name']
-    message = request.form['message']
+    f1=open("./cheeps.log",'a') #open cheep log
+    name = request.form['name'] #request the name id from webpage
+    message = request.form['message'] #... message id...
     print("got a cheep from [%s]: %s" % (name,message))
     f1.write('['+name+': '+message+']'+'\n')
     f1.close()
-    
+    # system time    
     # TODO: display the cheep on the kit LCD
+    try:
+        s=serial.Serial("/dev/ttyACM0",timeout=1)
+        s.write('b') #code that signals cheep
+        s.write(name.encode('latin-1'))
+        s.write(';') #end name character
+        s.write(message.encode('latin-1'))
+        s.write(':') #end message character
+        s.close()
+    except:
+        return render_template('error.html') #error page
+    
     return render_template('thankyou.html')
 
 @app.route("/test")

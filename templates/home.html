@@ -99,19 +99,20 @@
   </div>
 </div>
 
-<div class="container" style="padding-top: 75px">
+<div class="container" style="padding-top: 75px; margin-bottom:100px">
   <h2>Send a cheep</h2>
 
   <form action="/cheep" method="post">
     <div class="form-row">
-      <div class="col-4">
+      <div class="col-4" style="margin-bottom: 50px">
 	<label>Name: </label>
-	<input name="name" type="text" placeholder="Name" required>
+	<input name="name" type="text" placeholder="Name" maxlength="8" required>
+	<small class="form-text">8 characters or less</small>
       </div>
       <div class="col-4">
 	<label>Cheep: </label>
 	<input name="message" type="text" placeholder="Cheep away" maxlength="15" required>
-	<small class="form-text">Less than 16 characters please</small>
+	<small class="form-text">15 characters or less</small>
       </div>
     </div>
     <button type="submit" class="btn btn-primary">Cheep</button>

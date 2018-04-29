@@ -7,7 +7,7 @@
 //      VCC: 5V or 3V
 //      GND: GND
 //      DATA: 2
-int pinDHT11 = 2;
+int pinDHT11 = 1;
 SimpleDHT11 dht11;
 
 void setup() {
@@ -21,7 +21,7 @@ void loop() {
   byte data[40] = {0};
      
     if (dht11.read(pinDHT11, &temperature, &humidity, data)) {
-      Serial.print("Read DHT11 failed");
+      Serial.printls("Read DHT11 failed");
       return;
     }
      
